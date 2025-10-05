@@ -62,6 +62,23 @@
             list-style-type: disc;
             padding-left: 1.5rem;
         }
+        .video-section {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .video-section iframe {
+            width: 100%;
+            max-width: 400px;
+            height: 225px;
+            border: none;
+            border-radius: 8px;
+        }
+        .video-section .video-text {
+            flex: 1;
+            min-width: 250px;
+        }
         footer {
             background: linear-gradient(135deg, #007bff, #00c4ff);
             color: white;
@@ -81,6 +98,14 @@
             }
             p, li {
                 font-size: 1rem;
+            }
+            .video-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .video-section iframe {
+                max-width: 100%;
+                height: 200px;
             }
         }
     </style>
@@ -105,6 +130,21 @@
             <p>Interest in IT and game development.</p>
             <p>Studying English regularly (30–60 minutes per day), possibly Norwegian for relocation.</p>
             <p>Interest in mathematics, informatics, and algorithms.</p>
+        </section>
+
+        <section id="video">
+            <h2>Featured Video</h2>
+            <div class="video-section">
+                <iframe 
+                    src="https://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1&mute=1&loop=1&playlist=oHg5SJYRHA0" 
+                    title="Half-Life 2 Speedrun" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+                <div class="video-text">
+                    <p>Check out this awesome Half-Life 2 speedrun! I'm passionate about game development and draw inspiration from speedrunning communities and games like Half-Life 2, which influence my work on projects like SourceQ Engine.</p>
+                </div>
+            </div>
         </section>
 
         <section id="projects-goals">
