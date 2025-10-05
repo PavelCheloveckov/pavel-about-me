@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Pavel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -31,7 +31,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Roboto', 'Orbitron', sans-serif;
+            font-family: 'Roboto', 'Exo 2', sans-serif;
             line-height: 1.6;
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -40,6 +40,11 @@
             flex-direction: column;
             transition: background-color 0.3s ease, color 0.3s ease;
             position: relative;
+            opacity: 0;
+            animation: bodyFadeIn 1s ease forwards;
+        }
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
         }
         nav {
             position: fixed;
@@ -55,17 +60,18 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 20px;
-            transition: color 0.3s ease, text-shadow 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            transition: color 0.2s ease, text-shadow 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
             background: var(--glass-bg);
+            touch-action: manipulation;
         }
         nav a:hover {
             color: var(--accent-color);
@@ -79,9 +85,10 @@
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.6rem;
             border-radius: 50%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            touch-action: manipulation;
         }
         .theme-toggle:hover {
             transform: scale(1.1);
@@ -91,7 +98,7 @@
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: white;
             text-align: center;
-            padding: 4rem 2rem 2rem;
+            padding: 3rem 1.5rem;
             margin-top: 60px;
             box-shadow: 0 2px 5px var(--shadow-color);
             transition: background 0.3s ease;
@@ -109,34 +116,40 @@
             pointer-events: none;
         }
         header h1 {
-            font-size: 2.8rem;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px var(--shadow-color);
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            width: 100%;
-            position: relative;
             color: white;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: scaleIn 0.8s ease forwards;
+        }
+        @keyframes scaleIn {
+            to { opacity: 1; transform: scale(1); }
         }
         [data-theme="light"] header h1 {
             color: white;
         }
         .container {
             max-width: 900px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             padding: 0 1rem;
             flex: 1;
         }
         section {
             background: var(--glass-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 8px 32px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
         }
         section::before {
             content: '';
@@ -147,6 +160,14 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         }
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
         section:hover {
             transform: scale(1.03) translateY(-5px);
             box-shadow: 0 12px 40px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -154,10 +175,10 @@
         }
         h2 {
             color: var(--accent-color);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
             border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.4rem;
             position: relative;
         }
         h2::after {
@@ -171,8 +192,8 @@
             border-radius: 1px;
         }
         p, li {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
             color: var(--text-color);
         }
         ul {
@@ -186,14 +207,14 @@
             margin-right: 0.5rem;
         }
         .skills-progress {
-            margin: 1rem 0;
+            margin: 0.8rem 0;
         }
         .progress-bar {
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            height: 20px;
+            height: 18px;
             overflow: hidden;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             position: relative;
         }
         .progress-fill {
@@ -214,40 +235,54 @@
             border-radius: 10px;
         }
         .video-section {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            align-items: stretch;
+            margin-top: 1rem;
         }
-        .video-section iframe {
+        .video-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .video-wrapper {
+            position: relative;
             width: 100%;
-            max-width: 400px;
-            height: 225px;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
-            transition: transform 0.3s;
+            transition: transform 0.2s;
             background: var(--glass-bg);
         }
-        .video-section iframe:hover {
+        .video-wrapper iframe:hover {
             transform: scale(1.02);
         }
-        .video-section .video-text {
-            flex: 1;
-            min-width: 250px;
+        .video-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
         .gallery img {
             width: 100%;
-            height: 150px;
+            height: 120px;
             object-fit: cover;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             background: var(--glass-bg);
         }
         .gallery img:hover {
@@ -257,13 +292,13 @@
         .contact-form {
             display: none;
             max-width: 500px;
-            margin: 1rem auto;
+            margin: 0.8rem auto;
         }
         .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
+            padding: 0.6rem;
+            margin-bottom: 0.8rem;
+            border-radius: 8px;
             border: none;
             background: var(--glass-bg);
             color: var(--text-color);
@@ -272,16 +307,17 @@
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             box-shadow: 0 4px 15px var(--shadow-color);
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            touch-action: manipulation;
         }
         .contact-button:hover {
             transform: translateY(-3px) scale(1.05);
@@ -291,12 +327,13 @@
         .submit-button {
             background: var(--accent-color);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             width: 100%;
+            touch-action: manipulation;
         }
         .submit-button:hover {
             background: #e55a00;
@@ -306,7 +343,7 @@
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: white;
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.2rem;
             width: 100%;
             transition: background 0.3s ease;
             position: relative;
@@ -321,16 +358,17 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         }
         .social-icons {
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
         .social-icons a {
             color: white;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+            font-size: 1.3rem;
+            margin: 0 0.8rem;
+            transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
             background: var(--glass-bg);
-            padding: 0.5rem;
+            padding: 0.4rem;
             border-radius: 50%;
+            touch-action: manipulation;
         }
         .social-icons a:hover {
             color: var(--accent-color);
@@ -339,17 +377,18 @@
         }
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background: var(--accent-color);
             color: white;
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 0.8rem;
             border-radius: 50%;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0;
-            transition: opacity 0.3s, background 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.2s, background 0.2s ease, transform 0.2s ease;
             box-shadow: 0 4px 10px var(--shadow-color);
+            touch-action: manipulation;
         }
         .back-to-top.visible {
             opacity: 1;
@@ -370,29 +409,60 @@
             header h1 {
                 font-size: 1.8rem;
             }
+            header {
+                padding: 2rem 1rem;
+                margin-top: 80px;
+            }
             section {
-                padding: 1.5rem;
+                padding: 1rem;
+                border-radius: 10px;
             }
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+                margin-bottom: 0.6rem;
             }
             p, li {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .video-section {
-                flex-direction: column;
-                align-items: stretch;
+                grid-template-columns: 1fr;
             }
-            .video-section iframe {
+            .video-wrapper {
                 max-width: 100%;
-                height: 200px;
             }
             nav ul {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
             }
             nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .theme-toggle {
                 padding: 0.5rem;
+                font-size: 1rem;
+            }
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .gallery img {
+                height: 100px;
+            }
+            .contact-form input, .contact-form textarea {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+            .contact-button, .submit-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .social-icons a {
+                font-size: 1.1rem;
+                margin: 0 0.5rem;
+            }
+            .back-to-top {
+                padding: 0.5rem 0.7rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -403,7 +473,7 @@
         <ul>
             <li><a href="#personal">Personal</a></li>
             <li><a href="#education-skills">Skills</a></li>
-            <li><a href="#video">Video</a></li>
+            <li><a href="#video">Videos</a></li>
             <li><a href="#projects-goals">Projects</a></li>
             <li><a href="#plans-strategy">Plans</a></li>
             <li><button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button></li>
@@ -411,7 +481,7 @@
     </nav>
 
     <header>
-        <h1>About Me - Pavel</h1>
+        <h1>About Me</h1>
     </header>
 
     <div class="container">
@@ -446,17 +516,35 @@
         </section>
 
         <section id="video">
-            <h2>Featured Video</h2>
+            <h2>Half-Life 2 Beta 2003 Walkthrough Videos</h2>
             <div class="video-section">
-                <iframe 
-                    src="https://www.youtube.com/embed/EonIcfM9-hk?mute=1" 
-                    title="Half-Life 2 Speedrun" 
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
-                <div class="video-text">
-                    <p>Check out this awesome Half-Life 2 speedrun! I'm passionate about game development and draw inspiration from speedrunning communities and games like Half-Life 2, which influence my work on projects like SourceQ Engine.</p>
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/uZv6XDmZlrk?start=145&autoplay=1&mute=1&loop=1&playlist=uZv6XDmZlrk" 
+                            title="Half-Life 2 Beta 2003 Storyline Fix" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="video-text">
+                        <p>An updated demonstration of the Half-Life 2 September 2003 storyline fix by XJR9000, covering all 50 maps from d1_trainstation_01 to d3_canals_02. Features fixed scripts, models, level transitions, cubemaps, autosaves, and playerstarts for a seamless experience. Recorded with LeakNet and ANON build, with contributions from Витой and Maelstrom. Download available at hl2-beta.ru.</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/0N40r5c79nk?autoplay=1&mute=1&loop=1&playlist=0N40r5c79nk" 
+                            title="Team Fortress 2 2003 Build from Half-Life 2 Beta" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="video-text">
+                        <p>Demonstrates the early Team Fortress 2 code embedded in the Half-Life 2 Beta, including elements from the Invasion concept, showcasing multiplayer mechanics that were cut from the final game.</p>
+                    </div>
                 </div>
             </div>
         </section>
