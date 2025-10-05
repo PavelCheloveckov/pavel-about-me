@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Pavel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -14,6 +14,8 @@
             --secondary-color: #1a3c6b;
             --card-bg: rgba(255, 255, 255, 0.05);
             --shadow-color: rgba(0, 0, 0, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --blur: blur(10px);
         }
         [data-theme="light"] {
             --bg-color: #f0f2f5;
@@ -22,6 +24,8 @@
             --secondary-color: #00c4ff;
             --card-bg: rgba(255, 255, 255, 0.9);
             --shadow-color: rgba(0, 0, 0, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --blur: blur(5px);
         }
         * {
             margin: 0;
@@ -29,7 +33,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Roboto', 'Orbitron', sans-serif;
             line-height: 1.6;
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -37,6 +41,7 @@
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
         }
         #particles-js {
             position: fixed;
@@ -53,6 +58,7 @@
             box-shadow: 0 2px 5px var(--shadow-color);
             z-index: 1000;
             transition: background 0.3s ease;
+            backdrop-filter: var(--blur);
         }
         nav ul {
             list-style: none;
@@ -64,26 +70,33 @@
         nav a {
             color: white;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: color 0.3s ease, text-shadow 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            transition: color 0.3s ease, text-shadow 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
         }
         nav a:hover {
             color: var(--accent-color);
             text-shadow: 0 0 8px rgba(255, 98, 0, 0.8), 0 0 12px rgba(255, 98, 0, 0.6);
-            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         .theme-toggle {
-            background: none;
+            background: var(--glass-bg);
             border: none;
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 50%;
+            backdrop-filter: var(--blur);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .theme-toggle:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
         }
         header {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -93,16 +106,39 @@
             margin-top: 60px;
             box-shadow: 0 2px 5px var(--shadow-color);
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            pointer-events: none;
         }
         header h1 {
             font-size: 2.8rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px var(--shadow-color);
-            animation: glow 2s ease-in-out infinite alternate;
+            animation: glow 2s ease-in-out infinite alternate, typewriter 3s steps(40) 1s 1 normal both;
+            overflow: hidden;
+            border-right: .15em solid var(--accent-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            width: 0;
+            position: relative;
         }
         @keyframes glow {
             from { text-shadow: 2px 2px 4px var(--shadow-color); }
             to { text-shadow: 2px 2px 20px var(--accent-color); }
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
         }
         .container {
             max-width: 900px;
@@ -111,15 +147,27 @@
             flex: 1;
         }
         section {
-            background: var(--card-bg);
-            border-radius: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+            border-radius: 20px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 10px var(--shadow-color);
+            box-shadow: 0 8px 32px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeIn 0.5s ease forwards;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         }
         section:nth-child(1) { animation-delay: 0.1s; }
         section:nth-child(2) { animation-delay: 0.2s; }
@@ -130,9 +178,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
         section:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5);
-            background: rgba(255, 98, 0, 0.1);
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: rgba(255, 98, 0, 0.15);
         }
         h2 {
             color: var(--accent-color);
@@ -140,6 +188,17 @@
             margin-bottom: 1rem;
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 1px;
         }
         p, li {
             font-size: 1.1rem;
@@ -147,8 +206,14 @@
             color: var(--text-color);
         }
         ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li::before {
+            content: '▸';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
         .skills-progress {
             margin: 1rem 0;
@@ -159,6 +224,21 @@
             height: 20px;
             overflow: hidden;
             margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         .progress-fill {
             height: 100%;
@@ -167,6 +247,17 @@
             transition: width 2s ease-in-out;
             border-radius: 10px;
             animation: fillProgress 2s ease-in-out forwards;
+            position: relative;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+            border-radius: 10px;
         }
         @keyframes fillProgress {
             to { width: var(--width); }
@@ -182,9 +273,11 @@
             max-width: 400px;
             height: 225px;
             border: none;
-            border-radius: 8px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
             transition: transform 0.3s;
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
         }
         .video-section iframe:hover {
             transform: scale(1.02);
@@ -193,6 +286,53 @@
             flex: 1;
             min-width: 250px;
         }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5);
+        }
+        .contact-form {
+            display: none;
+            max-width: 500px;
+            margin: 1rem auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border: none;
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+            color: var(--text-color);
+        }
+        .contact-form button {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: darken(var(--accent-color), 10%);
+        }
         footer {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: white;
@@ -200,6 +340,16 @@
             padding: 1.5rem;
             width: 100%;
             transition: background 0.3s ease;
+            position: relative;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         }
         .social-icons {
             margin-top: 1rem;
@@ -208,11 +358,16 @@
             color: white;
             font-size: 1.5rem;
             margin: 0 1rem;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+            background: var(--glass-bg);
+            padding: 0.5rem;
+            border-radius: 50%;
+            backdrop-filter: var(--blur);
         }
         .social-icons a:hover {
             color: var(--accent-color);
             text-shadow: 0 0 8px rgba(255, 98, 0, 0.8);
+            transform: scale(1.2);
         }
         .back-to-top {
             position: fixed;
@@ -225,10 +380,14 @@
             text-decoration: none;
             font-size: 1rem;
             opacity: 0;
-            transition: opacity 0.3s, background 0.3s ease;
+            transition: opacity 0.3s, background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow-color);
         }
         .back-to-top.visible {
             opacity: 1;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
         }
         @media (max-width: 600px) {
             header h1 {
@@ -332,6 +491,11 @@
             <p>Quanto: Planned launch around 2030.</p>
             <p>Goal: Move to Norway after 18, study at university in IT engineering.</p>
             <p>Monetization of projects planned from age 15–16 through YouTube/X and donations.</p>
+            <div class="gallery">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=SourceQ" alt="SourceQ Engine Screenshot">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Windroid" alt="Windroid Screenshot">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Quanto" alt="Quanto Screenshot">
+            </div>
         </section>
 
         <section id="plans-strategy">
@@ -346,9 +510,16 @@
     <footer>
         <p>&copy; 2025 Pavel. Hosted on GitHub Pages.</p>
         <div class="social-icons">
-            <a href="https://www.youtube.com/@Sourcer-hl2" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://x.com/cheloveckov" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com/yourchannel" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://x.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
+        <button onclick="toggleContactForm()">Contact Me</button>
+        <form class="contact-form" id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
     </footer>
 
     <a href="#" class="back-to-top" id="back-to-top">↑</a>
@@ -420,6 +591,22 @@
             });
         });
         observer.observe(document.querySelector('.skills-progress'));
+
+        // Typewriter effect for header (already in CSS, but JS for restart if needed)
+
+        // Toggle contact form
+        function toggleContactForm() {
+            const form = document.getElementById('contact-form');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Handle form submit (simple alert for demo)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! (Demo)');
+            this.reset();
+            toggleContactForm();
+        });
     </script>
 </body>
 </html>
