@@ -15,7 +15,7 @@
             --card-bg: rgba(255, 255, 255, 0.05);
             --shadow-color: rgba(0, 0, 0, 0.3);
             --glass-bg: rgba(255, 255, 255, 0.1);
-            --blur: blur(10px);
+            --blur: blur(5px); /* Reduced from 10px */
         }
         [data-theme="light"] {
             --bg-color: #f0f2f5;
@@ -25,7 +25,7 @@
             --card-bg: rgba(255, 255, 255, 0.9);
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glass-bg: rgba(255, 255, 255, 0.8);
-            --blur: blur(5px);
+            --blur: blur(3px); /* Reduced from 5px */
         }
         * {
             margin: 0;
@@ -123,7 +123,7 @@
             font-size: 2.8rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px var(--shadow-color);
-            animation: glow 2s ease-in-out infinite alternate, typewriter 3s steps(40) 1s 1 normal both;
+            animation: typewriter 3s steps(40) 1s 1 normal both; /* Removed glow */
             overflow: hidden;
             border-right: .15em solid var(--accent-color);
             white-space: nowrap;
@@ -135,10 +135,6 @@
         }
         [data-theme="light"] header h1 {
             color: white;
-        }
-        @keyframes glow {
-            from { text-shadow: 2px 2px 4px var(--shadow-color); }
-            to { text-shadow: 2px 2px 20px var(--accent-color); }
         }
         @keyframes typewriter {
             from { width: 0; }
@@ -152,7 +148,6 @@
         }
         section {
             background: var(--glass-bg);
-            backdrop-filter: var(--blur);
             border-radius: 20px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -163,6 +158,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             overflow: hidden;
+            will-change: transform; /* Added for GPU hint */
         }
         section::before {
             content: '';
@@ -230,20 +226,6 @@
             margin-bottom: 0.5rem;
             position: relative;
         }
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
         .progress-fill {
             height: 100%;
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
@@ -252,6 +234,7 @@
             border-radius: 10px;
             animation: fillProgress 2s ease-in-out forwards;
             position: relative;
+            will-change: transform; /* Added for GPU hint */
         }
         .progress-fill::after {
             content: '';
@@ -281,7 +264,6 @@
             box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
             transition: transform 0.3s;
             background: var(--glass-bg);
-            backdrop-filter: var(--blur);
         }
         .video-section iframe:hover {
             transform: scale(1.02);
@@ -303,7 +285,6 @@
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             background: var(--glass-bg);
-            backdrop-filter: var(--blur);
         }
         .gallery img:hover {
             transform: scale(1.05);
@@ -321,7 +302,6 @@
             border-radius: 10px;
             border: none;
             background: var(--glass-bg);
-            backdrop-filter: var(--blur);
             color: var(--text-color);
         }
         .contact-button {
@@ -332,7 +312,6 @@
             border-radius: 25px;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            backdrop-filter: var(--blur);
             box-shadow: 0 4px 15px var(--shadow-color);
             font-weight: 500;
             display: inline-flex;
@@ -367,6 +346,7 @@
             width: 100%;
             transition: background 0.3s ease;
             position: relative;
+            backdrop-filter: var(--blur);
         }
         footer::before {
             content: '';
@@ -388,7 +368,6 @@
             background: var(--glass-bg);
             padding: 0.5rem;
             border-radius: 50%;
-            backdrop-filter: var(--blur);
         }
         .social-icons a:hover {
             color: var(--accent-color);
@@ -508,10 +487,11 @@
             <h2>Featured Video</h2>
             <div class="video-section">
                 <iframe 
-                    src="https://www.youtube.com/embed/EonIcfM9-hk?autoplay=1&mute=1&loop=1&playlist=EonIcfM9-hk" 
+                    src="https://www.youtube.com/embed/EonIcfM9-hk?mute=1" 
                     title="Half-Life 2 Speedrun" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    loading="lazy">
                 </iframe>
                 <div class="video-text">
                     <p>Check out this awesome Half-Life 2 speedrun! I'm passionate about game development and draw inspiration from speedrunning communities and games like Half-Life 2, which influence my work on projects like SourceQ Engine.</p>
@@ -527,9 +507,9 @@
             <p>Goal: Move to Norway after 18, study at university in IT engineering.</p>
             <p>Monetization of projects planned from age 15–16 through YouTube/X and donations.</p>
             <div class="gallery">
-                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=SourceQ" alt="SourceQ Engine Screenshot">
-                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Windroid" alt="Windroid Screenshot">
-                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Quanto" alt="Quanto Screenshot">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=SourceQ" alt="SourceQ Engine Screenshot" loading="lazy">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Windroid" alt="Windroid Screenshot" loading="lazy">
+                <img src="https://via.placeholder.com/200x150/1a3c6b/ff6200?text=Quanto" alt="Quanto Screenshot" loading="lazy">
             </div>
         </section>
 
@@ -563,21 +543,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js config for futuristic blue-orange theme (reduced number for less lag)
+        // Particles.js config for futuristic blue-orange theme (optimized for performance)
         particlesJS('particles-js', {
             particles: {
-                number: { value: 40, density: { enable: true, value_area: 800 } },
+                number: { value: 20, density: { enable: true, value_area: 800 } },
                 color: { value: ['#ff6200', '#1a3c6b', '#00c4ff'] },
                 shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: false },
                 line_linked: { enable: true, distance: 150, color: '#ff6200', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+                move: { enable: true, speed: 0.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
             },
             retina_detect: true
         });
