@@ -19,7 +19,7 @@
         }
         [data-theme="light"] {
             --bg-color: #f0f2f5;
-            --text-color: #333;
+            --text-color: #000;
             --accent-color: #007bff;
             --secondary-color: #00c4ff;
             --card-bg: rgba(255, 255, 255, 0.9);
@@ -131,6 +131,10 @@
             letter-spacing: .15em;
             width: 0;
             position: relative;
+            color: white;
+        }
+        [data-theme="light"] header h1 {
+            color: white;
         }
         @keyframes glow {
             from { text-shadow: 2px 2px 4px var(--shadow-color); }
@@ -320,18 +324,40 @@
             backdrop-filter: var(--blur);
             color: var(--text-color);
         }
-        .contact-form button {
+        .contact-button {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            backdrop-filter: var(--blur);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .contact-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 98, 0, 0.6), 0 0 20px rgba(255, 98, 0, 0.4);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+        .submit-button {
             background: var(--accent-color);
             color: white;
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             width: 100%;
         }
-        .contact-form button:hover {
+        .submit-button:hover {
             background: #e55a00;
+            transform: scale(1.02);
         }
         footer {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -388,6 +414,15 @@
         }
         .back-to-top:hover {
             transform: scale(1.1);
+        }
+        [data-theme="light"] .back-to-top {
+            color: white;
+        }
+        [data-theme="light"] footer {
+            color: white;
+        }
+        [data-theme="light"] .social-icons a {
+            color: white;
         }
         @media (max-width: 600px) {
             header h1 {
@@ -513,12 +548,14 @@
             <a href="https://youtube.com/yourchannel" target="_blank"><i class="fab fa-youtube"></i></a>
             <a href="https://x.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
-        <button onclick="toggleContactForm()">Contact Me</button>
+        <button class="contact-button" onclick="toggleContactForm()">
+            <i class="fas fa-envelope"></i> Contact Me
+        </button>
         <form class="contact-form" id="contact-form" action="https://formspree.io/f/mzzjvgpp" method="POST" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
+            <button type="submit" class="submit-button">Send Message</button>
         </form>
     </footer>
 
@@ -526,16 +563,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js config for futuristic blue-orange theme
+        // Particles.js config for futuristic blue-orange theme (reduced number for less lag)
         particlesJS('particles-js', {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
+                number: { value: 40, density: { enable: true, value_area: 800 } },
                 color: { value: ['#ff6200', '#1a3c6b', '#00c4ff'] },
                 shape: { type: 'circle' },
                 opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
                 line_linked: { enable: true, distance: 150, color: '#ff6200', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+                move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
             },
             interactivity: {
                 detect_on: 'canvas',
