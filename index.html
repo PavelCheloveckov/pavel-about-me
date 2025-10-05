@@ -331,7 +331,7 @@
             width: 100%;
         }
         .contact-form button:hover {
-            background: darken(var(--accent-color), 10%);
+            background: #e55a00;
         }
         footer {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -514,10 +514,10 @@
             <a href="https://x.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
         <button onclick="toggleContactForm()">Contact Me</button>
-        <form class="contact-form" id="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="4" required></textarea>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/mzzjvgpp" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </footer>
@@ -592,21 +592,11 @@
         });
         observer.observe(document.querySelector('.skills-progress'));
 
-        // Typewriter effect for header (already in CSS, but JS for restart if needed)
-
         // Toggle contact form
         function toggleContactForm() {
             const form = document.getElementById('contact-form');
             form.style.display = form.style.display === 'block' ? 'none' : 'block';
         }
-
-        // Handle form submit (simple alert for demo)
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Message sent! (Demo)');
-            this.reset();
-            toggleContactForm();
-        });
     </script>
 </body>
 </html>
