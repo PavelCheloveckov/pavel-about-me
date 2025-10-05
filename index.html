@@ -49,6 +49,10 @@
             height: 100%;
             z-index: -1;
         }
+        #particles-js canvas {
+            will-change: transform;
+            transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+        }
         nav {
             position: fixed;
             top: 0;
@@ -543,10 +547,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js config for futuristic blue-orange theme (optimized for performance)
+        // Particles.js config for futuristic blue-orange theme (increased to 40 particles)
         particlesJS('particles-js', {
             particles: {
-                number: { value: 20, density: { enable: true, value_area: 800 } },
+                number: { value: 40, density: { enable: true, value_area: 800 } },
                 color: { value: ['#ff6200', '#1a3c6b', '#00c4ff'] },
                 shape: { type: 'circle' },
                 opacity: { value: 0.5, random: false },
