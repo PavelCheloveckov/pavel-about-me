@@ -15,7 +15,6 @@
             --card-bg: rgba(255, 255, 255, 0.05);
             --shadow-color: rgba(0, 0, 0, 0.3);
             --glass-bg: rgba(255, 255, 255, 0.1);
-            --blur: blur(5px); /* Reduced from 10px */
         }
         [data-theme="light"] {
             --bg-color: #f0f2f5;
@@ -25,7 +24,6 @@
             --card-bg: rgba(255, 255, 255, 0.9);
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glass-bg: rgba(255, 255, 255, 0.8);
-            --blur: blur(3px); /* Reduced from 5px */
         }
         * {
             margin: 0;
@@ -43,16 +41,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             position: relative;
         }
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        #particles-js canvas {
-            will-change: transform;
-            transform: translate3d(0, 0, 0); /* Force GPU acceleration */
-        }
         nav {
             position: fixed;
             top: 0;
@@ -62,7 +50,6 @@
             box-shadow: 0 2px 5px var(--shadow-color);
             z-index: 1000;
             transition: background 0.3s ease;
-            backdrop-filter: var(--blur);
         }
         nav ul {
             list-style: none;
@@ -77,15 +64,11 @@
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            transition: color 0.3s ease, text-shadow 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            transition: color 0.3s ease;
             background: var(--glass-bg);
-            backdrop-filter: var(--blur);
         }
         nav a:hover {
             color: var(--accent-color);
-            text-shadow: 0 0 8px rgba(255, 98, 0, 0.8), 0 0 12px rgba(255, 98, 0, 0.6);
-            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
         }
         .theme-toggle {
             background: var(--glass-bg);
@@ -95,12 +78,10 @@
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 50%;
-            backdrop-filter: var(--blur);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
         .theme-toggle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
         }
         header {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -127,22 +108,15 @@
             font-size: 2.8rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px var(--shadow-color);
-            animation: typewriter 3s steps(40) 1s 1 normal both; /* Removed glow */
-            overflow: hidden;
-            border-right: .15em solid var(--accent-color);
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: .15em;
-            width: 0;
+            width: 100%;
             position: relative;
             color: white;
         }
         [data-theme="light"] header h1 {
             color: white;
-        }
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
         }
         .container {
             max-width: 900px;
@@ -156,13 +130,8 @@
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 8px 32px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s ease forwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             overflow: hidden;
-            will-change: transform; /* Added for GPU hint */
         }
         section::before {
             content: '';
@@ -172,19 +141,6 @@
             right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-        }
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        section:nth-child(5) { animation-delay: 0.5s; }
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        section:hover {
-            transform: scale(1.03) translateY(-5px);
-            box-shadow: 0 12px 40px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: rgba(255, 98, 0, 0.15);
         }
         h2 {
             color: var(--accent-color);
@@ -233,12 +189,9 @@
         .progress-fill {
             height: 100%;
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-            width: 0;
-            transition: width 2s ease-in-out;
+            width: var(--width);
             border-radius: 10px;
-            animation: fillProgress 2s ease-in-out forwards;
             position: relative;
-            will-change: transform; /* Added for GPU hint */
         }
         .progress-fill::after {
             content: '';
@@ -249,9 +202,6 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
             border-radius: 10px;
-        }
-        @keyframes fillProgress {
-            to { width: var(--width); }
         }
         .video-section {
             display: flex;
@@ -266,11 +216,7 @@
             border: none;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
-            transition: transform 0.3s;
             background: var(--glass-bg);
-        }
-        .video-section iframe:hover {
-            transform: scale(1.02);
         }
         .video-section .video-text {
             flex: 1;
@@ -287,12 +233,7 @@
             height: 150px;
             object-fit: cover;
             border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             background: var(--glass-bg);
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5);
         }
         .contact-form {
             display: none;
@@ -315,7 +256,7 @@
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: background 0.3s ease;
             box-shadow: 0 4px 15px var(--shadow-color);
             font-weight: 500;
             display: inline-flex;
@@ -324,8 +265,6 @@
             margin: 1rem 0;
         }
         .contact-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 98, 0, 0.6), 0 0 20px rgba(255, 98, 0, 0.4);
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
         }
         .submit-button {
@@ -335,12 +274,11 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.3s ease;
             width: 100%;
         }
         .submit-button:hover {
             background: #e55a00;
-            transform: scale(1.02);
         }
         footer {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -350,7 +288,6 @@
             width: 100%;
             transition: background 0.3s ease;
             position: relative;
-            backdrop-filter: var(--blur);
         }
         footer::before {
             content: '';
@@ -368,15 +305,13 @@
             color: white;
             font-size: 1.5rem;
             margin: 0 1rem;
-            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+            transition: color 0.3s ease;
             background: var(--glass-bg);
             padding: 0.5rem;
             border-radius: 50%;
         }
         .social-icons a:hover {
             color: var(--accent-color);
-            text-shadow: 0 0 8px rgba(255, 98, 0, 0.8);
-            transform: scale(1.2);
         }
         .back-to-top {
             position: fixed;
@@ -389,14 +324,11 @@
             text-decoration: none;
             font-size: 1rem;
             opacity: 0;
-            transition: opacity 0.3s, background 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.3s, background 0.3s ease;
             box-shadow: 0 4px 10px var(--shadow-color);
         }
         .back-to-top.visible {
             opacity: 1;
-        }
-        .back-to-top:hover {
-            transform: scale(1.1);
         }
         [data-theme="light"] .back-to-top {
             color: white;
@@ -439,7 +371,6 @@
     </style>
 </head>
 <body data-theme="dark">
-    <div id="particles-js"></div>
 
     <nav>
         <ul>
@@ -472,17 +403,17 @@
             <p>Studying English regularly (30–60 minutes per day), possibly Norwegian for relocation.</p>
             <p>Interest in mathematics, informatics, and algorithms.</p>
             <div class="skills-progress">
-                <label>C++ (Low-level): <span class="progress-label">80%</span></label>
+                <label>C++ (Low-level): <span class="progress-label">15%</span></label>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="--width: 80%;"></div>
+                    <div class="progress-fill" style="--width: 15%;"></div>
                 </div>
-                <label>Kotlin: <span class="progress-label">70%</span></label>
+                <label>Kotlin: <span class="progress-label">5%</span></label>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="--width: 70%;"></div>
+                    <div class="progress-fill" style="--width: 5%;"></div>
                 </div>
-                <label>English: <span class="progress-label">60%</span></label>
+                <label>English: <span class="progress-label">40%</span></label>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="--width: 60%;"></div>
+                    <div class="progress-fill" style="--width: 40%;"></div>
                 </div>
             </div>
         </section>
@@ -545,26 +476,7 @@
 
     <a href="#" class="back-to-top" id="back-to-top">↑</a>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js config for futuristic blue-orange theme (increased to 40 particles)
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 40, density: { enable: true, value_area: 800 } },
-                color: { value: ['#ff6200', '#1a3c6b', '#00c4ff'] },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: false },
-                line_linked: { enable: true, distance: 150, color: '#ff6200', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 0.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
-            },
-            retina_detect: true
-        });
-
         // Smooth scrolling for nav links
         document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -600,17 +512,6 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.body.setAttribute('data-theme', savedTheme);
         document.querySelector('.theme-toggle i').className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-
-        // Animate progress bars on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const fills = entry.target.querySelectorAll('.progress-fill');
-                    fills.forEach(fill => fill.style.animationPlayState = 'running');
-                }
-            });
-        });
-        observer.observe(document.querySelector('.skills-progress'));
 
         // Toggle contact form
         function toggleContactForm() {
