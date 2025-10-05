@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Pavel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,24 +12,50 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f0f2f5;
-            color: #333;
+            background-color: #0a1a2e;
+            color: #e0e0e0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #1a3c6b, #ff6200);
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff6200;
+        }
         header {
-            background: linear-gradient(135deg, #007bff, #00c4ff);
+            background: linear-gradient(135deg, #1a3c6b, #ff6200);
             color: white;
             text-align: center;
-            padding: 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 4rem 2rem 2rem;
+            margin-top: 60px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .container {
             max-width: 900px;
@@ -37,26 +64,37 @@
             flex: 1;
         }
         section {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
         section:hover {
-            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(255, 98, 0, 0.3);
         }
         h2 {
-            color: #007bff;
+            color: #ff6200;
             font-size: 1.8rem;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid #ff6200;
             padding-bottom: 0.5rem;
         }
         p, li {
             font-size: 1.1rem;
             margin-bottom: 0.8rem;
+            color: #d0d0d0;
         }
         ul {
             list-style-type: disc;
@@ -74,17 +112,38 @@
             height: 225px;
             border: none;
             border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .video-section iframe:hover {
+            transform: scale(1.02);
         }
         .video-section .video-text {
             flex: 1;
             min-width: 250px;
         }
         footer {
-            background: linear-gradient(135deg, #007bff, #00c4ff);
+            background: linear-gradient(135deg, #1a3c6b, #ff6200);
             color: white;
             text-align: center;
             padding: 1.5rem;
             width: 100%;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff6200;
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .back-to-top.visible {
+            opacity: 1;
         }
         @media (max-width: 600px) {
             header h1 {
@@ -107,10 +166,24 @@
                 max-width: 100%;
                 height: 200px;
             }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="#personal">Personal</a></li>
+            <li><a href="#education-skills">Skills</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#projects-goals">Projects</a></li>
+            <li><a href="#plans-strategy">Plans</a></li>
+        </ul>
+    </nav>
+
     <header>
         <h1>About Me - Pavel</h1>
     </header>
@@ -168,5 +241,29 @@
     <footer>
         <p>&copy; 2025 Pavel. Hosted on GitHub Pages.</p>
     </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top">↑</a>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back-to-top button visibility
+        window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 </html>
