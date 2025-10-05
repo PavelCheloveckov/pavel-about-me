@@ -64,11 +64,14 @@
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
             background: var(--glass-bg);
         }
         nav a:hover {
             color: var(--accent-color);
+            text-shadow: 0 0 8px rgba(255, 98, 0, 0.8), 0 0 12px rgba(255, 98, 0, 0.6);
+            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         .theme-toggle {
             background: var(--glass-bg);
@@ -78,10 +81,11 @@
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 50%;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .theme-toggle:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
         }
         header {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -132,6 +136,7 @@
             box-shadow: 0 8px 32px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
         section::before {
             content: '';
@@ -141,6 +146,11 @@
             right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+        section:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 98, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: rgba(255, 98, 0, 0.15);
         }
         h2 {
             color: var(--accent-color);
@@ -216,7 +226,11 @@
             border: none;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
+            transition: transform 0.3s;
             background: var(--glass-bg);
+        }
+        .video-section iframe:hover {
+            transform: scale(1.02);
         }
         .video-section .video-text {
             flex: 1;
@@ -233,7 +247,12 @@
             height: 150px;
             object-fit: cover;
             border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             background: var(--glass-bg);
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5);
         }
         .contact-form {
             display: none;
@@ -256,7 +275,7 @@
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             box-shadow: 0 4px 15px var(--shadow-color);
             font-weight: 500;
             display: inline-flex;
@@ -265,6 +284,8 @@
             margin: 1rem 0;
         }
         .contact-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 98, 0, 0.6), 0 0 20px rgba(255, 98, 0, 0.4);
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
         }
         .submit-button {
@@ -274,11 +295,12 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             width: 100%;
         }
         .submit-button:hover {
             background: #e55a00;
+            transform: scale(1.02);
         }
         footer {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
@@ -305,13 +327,15 @@
             color: white;
             font-size: 1.5rem;
             margin: 0 1rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
             background: var(--glass-bg);
             padding: 0.5rem;
             border-radius: 50%;
         }
         .social-icons a:hover {
             color: var(--accent-color);
+            text-shadow: 0 0 8px rgba(255, 98, 0, 0.8);
+            transform: scale(1.2);
         }
         .back-to-top {
             position: fixed;
@@ -324,11 +348,14 @@
             text-decoration: none;
             font-size: 1rem;
             opacity: 0;
-            transition: opacity 0.3s, background 0.3s ease;
+            transition: opacity 0.3s, background 0.3s ease, transform 0.3s ease;
             box-shadow: 0 4px 10px var(--shadow-color);
         }
         .back-to-top.visible {
             opacity: 1;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
         }
         [data-theme="light"] .back-to-top {
             color: white;
